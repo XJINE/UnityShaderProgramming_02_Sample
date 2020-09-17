@@ -1,4 +1,4 @@
-﻿Shader "Sample/Macro"
+﻿Shader "Sample/Keyword"
 {
     Properties { }
 
@@ -18,10 +18,7 @@
             #pragma vertex   vert
             #pragma fragment frag
 
-            #define RChannel 1
-            #define Color float4(RChannel, 0, 0, 1)
-            #define PI 3.141592
-            #define Circumference(r) 2 * PI * r
+            #define KEYWORD_RED
 
             struct appdata
             {
@@ -42,12 +39,13 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float r = RChannel;
-                float c = Circumference(0.1);
+                #ifdef KEYWORD_RED
 
-                // float RChannel = 1;
+                return fixed4(1, 0, 0, 1);
 
-                return Color;
+                #endif
+
+                return fixed4(1, 1, 1, 1);
             }
 
             ENDCG
